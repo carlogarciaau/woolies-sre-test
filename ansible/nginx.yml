@@ -1,0 +1,29 @@
+---
+- hosts: nginx
+  gather_facts: no
+  
+  vars:
+    ansible_ssh_user: 'sa_<replace_this>'
+    ansible_ssh_private_key_file: ssh-key-ansible-sa
+      
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+      listen: changed
+
+  tasks:
+    - name: Ensure Nginx is installed
+      apt:
+        name: ['nginx']
+        state: present
+      tags: install
+
+    - name: Copy home page
+      copy:
+        src: "./index.html"
+        dest: "/var/www/html/index.html"
+        mode: 0644
+      tags: config

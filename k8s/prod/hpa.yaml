@@ -1,0 +1,8 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  maxReplicas: 4
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 60
