@@ -37,6 +37,10 @@ resource "google_compute_instance_template" "webserver" {
   }
 
   depends_on = [google_project_service.compute]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "google_compute_region_instance_group_manager" "webserver_igm" {
@@ -58,6 +62,10 @@ resource "google_compute_region_instance_group_manager" "webserver_igm" {
     health_check      = google_compute_health_check.http_health_check.self_link
     initial_delay_sec = 10
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "google_compute_region_autoscaler" "webserver_autoscaler" {
@@ -66,8 +74,8 @@ resource "google_compute_region_autoscaler" "webserver_autoscaler" {
   target = google_compute_region_instance_group_manager.webserver_igm.id
 
   autoscaling_policy {
-    max_replicas    = 4
-    min_replicas    = 1
+    max_replicas    = var.max_replicas
+    min_replicas    = var.min_replicas
     cooldown_period = 60
 
     cpu_utilization {

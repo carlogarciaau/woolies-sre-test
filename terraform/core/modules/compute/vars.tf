@@ -12,3 +12,13 @@ variable "subnetwork" {
   type    = string
   default = "subnet-public"
 }
+
+variable "min_replicas" {
+  type    = number
+  default = 1
+}
+
+variable "max_replicas" {
+  type    = number
+  default = 4
+}

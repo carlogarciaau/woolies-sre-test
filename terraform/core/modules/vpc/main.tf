@@ -33,7 +33,6 @@ resource "google_project_service" "compute" {
   disable_on_destroy = false
 }
 
-# NAT Router
 resource "google_compute_router" "router" {
   name    = "router"
   region  = var.private_subnet_region

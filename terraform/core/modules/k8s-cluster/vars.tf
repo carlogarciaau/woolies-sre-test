@@ -10,14 +10,14 @@ variable "region" {
   default     = "australia-southeast1"
 }
 
-variable "backend_bucket" {
-  description = "backend bucket for tf state"
+variable "vpc_name" {
+  description = "Name of the vpc network"
   type        = string
-  default     = "cg-wooliesx-terraform-states"
+  default     = "vpc"
 }
 
-variable "nginx_conf_bucket" {
-  description = "bucket for holding nginx index.html"
+variable "subnet_name" {
+  description = "Name of the subnet"
   type        = string
-  default     = "cg-wooliesx-nginx-conf"
+  default     = "subnet-private"
 }
