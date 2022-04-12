@@ -14,7 +14,7 @@ Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansib
 ## GCE Deployment Steps:
 1. `cd terraform;` Update vars.tf with your GCP project id and region
 2. `terraform init / fmt --recursive / validate / plan / apply`
-3. This provisions the VPC, subnets, instance group, K8s cluster, and the rest of the infrastructure. 
+3. This provisions the VPC, subnets, HTTP load balancer, instance group, K8s cluster, and the rest of the infrastructure. 
 
 ## K8s App Deployment
 1. Setup k8s - `gcloud container clusters get-credentials <YOUR_PROJECT_ID>-gke --region <YOUR_REGION> --project <YOUR_PROJECT_ID>`
