@@ -34,8 +34,8 @@ resource "google_storage_bucket" "nginx_conf" {
 }
 
 resource "google_storage_bucket_access_control" "nginx_conf_rule" {
-  bucket        = google_storage_bucket.nginx_conf.name
-  role          = "WRITER"
-  entity        = "user-${module.ansible-service-account.sa_email}"
-  depends_on    = [module.ansible-service-account]
+  bucket     = google_storage_bucket.nginx_conf.name
+  role       = "WRITER"
+  entity     = "user-${module.ansible-service-account.sa_email}"
+  depends_on = [module.ansible-service-account]
 }
