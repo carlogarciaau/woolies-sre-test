@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "cg-wooliesx-terraform-states"
+    bucket = "wooliesx-sre-exam-terraform-states"
     prefix = "gcp/core"
   }
   required_providers {

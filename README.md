@@ -1,8 +1,47 @@
-# woolies-sre-test
+# WooliesX-SRE-Test
 
-gcloud container clusters get-credentials cg-wooliesx-devops-exam-gke --region australia-southeast1 --project cg-wooliesx-devops-exam
+## Summary
+Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansible tasks. This is all done in GCP.
 
+## Pre-requisites
+1. A GCP project with billing enabled
+2. gcloud CLI (https://cloud.google.com/sdk/docs/install)
+3. Configure gcloud `gcloud init;` `gcloud auth application-default login`
+4. Terraform CLI (using v1.0.7 as of this writing)
+5. Ansible (www.ansible.com); If on MAC -> `brew install ansible`
+6. kubectl (gcloud components install kubectl)
 
-https://www.densify.com/kubernetes-tools/kustomize
+## Setting up the Backend
+1. `cd terraform/remote-state;` Update vars.tf with your GCP project id and region.
+2. `terraform init / fmt --recursive / validate / plan / apply`
+3. This sets up the bucket for terraform state and for nginx config/index.html later.
 
-gcloud compute forwarding-rules list
+## GCE Deployment Steps:
+1. `cd terraform/core;` Update vars.tf with your GCP project id and region
+2. `terraform init / fmt --recursive / validate / plan / apply`
+3. This provisions the VPC, subnets, K8s cluster, and the rest of the infrastructure. 
+
+## K8s App Deployment
+1. Setup k8s - `gcloud container clusters get-credentials <YOUR_PROJECT_ID>-gke --region <YOUR_REGION> --project <YOUR_PROJECT_ID>`
+2. Example: `gcloud container clusters get-credentials my-project-gke --region australia-southeast1 --project wooliesx-exam`
+3. `cd k8s/prod; kubectl apply -k .` 
+4. There should now be 2 public HTTP endpoints in GCE and K8S. Use `gcloud compute forwarding-rules list` to retrieve these. 
+
+## Ansible
+1. Make sure you are currently in the right project before proceeding. `gcloud config get-value project`. 
+2. `cd ansible;` `make setup-ssh-keys;` This sets up the ssh keys and linking to the service account created by Terraform. 
+3. Follow instruction from prompt and update `nginx.yml` playbook with the service account id.
+4. Example:  `ansible_ssh_user: 'sa_1324984113574'`
+5. `make apply` will create an inventory of running instances and update the NGINX servers running on each.
+ 
+
+## Activity Notes:
+- Two subnets were created (public/private). Subnets in GCP are a bit vague with regards to this, as external IP addresses are assigned at resource level. 
+- A Cloud NAT Gateway was provisioned to allow outbound connectivity. In practice, further firewall rules will be created to only keep the necessary ports.
+- Scaling on GCE was done using a regional instance group manager and regional autoscaler. 
+- On K8s, an HPA was included. 
+- Ansible connection was accomplished by creating a service account and linking a public key to it. The private key is then used by the playbook. 
+
+### What needs to be set up for ansible to be able to control windows machines?
+1. PowerShell 3.0 or newer and at least .NET 4.0 to be installed on the Windows host.
+2. WinRM listener should be created and activated

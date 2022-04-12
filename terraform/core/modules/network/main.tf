@@ -39,7 +39,6 @@ resource "google_compute_firewall" "webserver" {
   target_tags   = var.target_tags
 }
 
-# Debugging
 resource "google_compute_firewall" "allow-ssh" {
   name    = "allow-ssh"
   network = "vpc"

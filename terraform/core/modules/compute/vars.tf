@@ -1,3 +1,7 @@
+variable "region" {
+  type = string
+}
+
 variable "source_image" {
   type    = string
   default = "debian-cloud/debian-9"
@@ -15,7 +19,7 @@ variable "subnetwork" {
 
 variable "min_replicas" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "max_replicas" {

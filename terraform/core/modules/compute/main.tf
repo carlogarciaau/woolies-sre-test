@@ -47,7 +47,7 @@ resource "google_compute_region_instance_group_manager" "webserver_igm" {
   name = "webserver-igm"
 
   base_instance_name = "webserver"
-  region             = "australia-southeast1"
+  region             = var.region
 
   version {
     instance_template = google_compute_instance_template.webserver.id
@@ -70,7 +70,7 @@ resource "google_compute_region_instance_group_manager" "webserver_igm" {
 
 resource "google_compute_region_autoscaler" "webserver_autoscaler" {
   name   = "webserver-autoscaler"
-  region = "australia-southeast1"
+  region = var.region
   target = google_compute_region_instance_group_manager.webserver_igm.id
 
   autoscaling_policy {

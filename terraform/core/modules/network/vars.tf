@@ -1,7 +1,6 @@
 variable "region" {
   description = "Region"
   type        = string
-  default     = "australia-southeast1"
 }
 
 variable "forwarding_rule_port_range" {

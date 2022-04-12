@@ -25,7 +25,6 @@ variable "public_subnet_description" {
 variable "public_subnet_region" {
   description = "Region for the public subnet"
   type        = string
-  default     = "australia-southeast1"
 }
 
 variable "private_subnet_name" {
@@ -43,7 +42,6 @@ variable "private_subnet_description" {
 variable "private_subnet_region" {
   description = "Region for the private subnet"
   type        = string
-  default     = "australia-southeast1"
 }
 
 variable "cidr_public" {
