@@ -14,6 +14,9 @@ provider "google" {
 resource "google_storage_bucket" "terraform_state" {
   name     = var.backend_bucket
   location = "ASIA"
+  versioning {
+    enabled = true
+  }
 }
 
 resource "google_storage_bucket" "nginx_conf" {
