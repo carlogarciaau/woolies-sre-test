@@ -30,3 +30,5 @@ override.tf.json
 .terraform.lock.hcl
 
 ansible/inventory
+ansible/.gcp
+ansible/ssh-key*

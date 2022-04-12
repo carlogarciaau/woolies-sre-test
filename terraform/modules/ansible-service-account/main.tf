@@ -16,3 +16,7 @@ resource "google_project_iam_member" "member-role" {
   member  = "serviceAccount:${google_service_account.ansible_sa.email}"
   project = var.project
 }
+
+output "sa_email" {
+  value = google_service_account.ansible_sa.email
+}

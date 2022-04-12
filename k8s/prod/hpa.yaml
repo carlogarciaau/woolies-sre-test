@@ -3,6 +3,6 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: nginx-hpa
 spec:
-  maxReplicas: 12
-  minReplicas: 6
-  targetCPUUtilizationPercentage: 50
+  maxReplicas: 4
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 60
