@@ -18,6 +18,10 @@ apply: inventory upload
 	@echo "Running ansible playbook"
 	@ansible-playbook -i inventory nginx.yml --tags "config" --ssh-common-args='-o StrictHostKeyChecking=no'
 
+test: inventory
+	@echo "Ansible dry run"
+	@ansible-playbook -i inventory nginx.yml --check --ssh-common-args='-o StrictHostKeyChecking=no'
+
 setup-ssh-keys:
 	gcloud compute project-info add-metadata \
 		--metadata enable-oslogin=TRUE 
