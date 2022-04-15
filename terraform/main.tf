@@ -29,8 +29,9 @@ module "ansible-service-account" {
 }
 
 resource "google_storage_bucket" "nginx_conf" {
-  name     = "wooliesx-sre-exam-nginx-conf"
-  location = "ASIA"
+  name          = "wooliesx-sre-exam-nginx-conf"
+  location      = "ASIA"
+  force_destroy = true
 }
 
 resource "google_storage_bucket_access_control" "nginx_conf_rule" {

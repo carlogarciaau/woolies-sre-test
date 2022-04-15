@@ -7,7 +7,6 @@ rm /var/lib/dpkg/lock*
 apt update
 apt install -y nginx
 ufw allow 'Nginx HTTP'
-chmod 777 /var/www/html/
 
 # Default hello world home page
 tee /var/www/html/index.html <<EOT
