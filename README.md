@@ -9,7 +9,7 @@ Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansib
 3. Configure gcloud `gcloud init;` `gcloud auth application-default login`
 4. Terraform CLI (using v1.0.7 as of this writing)
 5. Ansible (www.ansible.com); If on MAC -> `brew install ansible`
-6. kubectl (gcloud components install kubectl)
+6. kubectl `gcloud components install kubectl`
 
 ## GCE Deployment Steps:
 1. `cd terraform;` Update vars.tf with your GCP project id and region
@@ -19,8 +19,13 @@ Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansib
 ## K8s App Deployment
 1. Setup k8s - `gcloud container clusters get-credentials <YOUR_PROJECT_ID>-gke --region <YOUR_REGION> --project <YOUR_PROJECT_ID>`
 2. Example: `gcloud container clusters get-credentials my-project-gke --region australia-southeast1 --project wooliesx-exam`
-3. `cd k8s/prod; kubectl apply -k .` 
-4. After a minute or two, there should now be 2 public HTTP endpoints in GCE and K8S. Use `gcloud compute forwarding-rules list` to retrieve these. 
+3. `cd k8s/overlay/dev`
+4. Test with `kubectl apply -k . --dry-run=client`
+5. Apply with `kubectl apply -k .` 
+6. Note: overlay directories simulate a dev or prod environment. Dev will not deploy an HPA while Prod does along with increased resources and a rollingupdate strategy.
+
+## Public endpoints
+1. There should now be 2 public HTTP endpoints in GCE and K8S. Use `gcloud compute forwarding-rules list` to retrieve these. 
 
 ## Ansible
 1. Make sure you are currently in the right project before proceeding. `gcloud config get-value project`. 

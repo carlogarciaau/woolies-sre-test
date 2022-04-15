@@ -38,4 +38,8 @@ resource "google_storage_bucket_access_control" "nginx_conf_rule" {
   role       = "WRITER"
   entity     = "user-${module.ansible-service-account.sa_email}"
   depends_on = [module.ansible-service-account]
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
