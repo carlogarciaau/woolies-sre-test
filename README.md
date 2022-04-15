@@ -33,6 +33,7 @@ Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansib
 3. Follow instruction from prompt and update `nginx.yml` playbook with the service account id.
 4. Example:  `ansible_ssh_user: 'sa_1324984113574'`
 5. `make apply` will create an inventory of running instances and update the NGINX servers running on each.
+6. Make sure to switch back from the ansible service account to your account. `gcloud config set account your@gmail.com`
  
 
 ## Activity Notes:
