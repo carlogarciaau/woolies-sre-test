@@ -22,7 +22,7 @@ tee /var/www/html/index.html <<EOT
 EOT
 
 # Pull latest home page from bucket
-gsutil cp gs://wooliesx-sre-exam-nginx-conf/index.html /var/www/html/index.html || true
+gsutil cp gs://wx-sre-exam-nginx-conf/index.html /var/www/html/index.html || true
 
 systemctl enable nginx
 systemctl restart nginx

@@ -10,8 +10,8 @@ inventory:
 	 | awk '{print $$5}' | grep -E '[0-9\.]+' >> inventory
 
 upload:
-	@echo "Uploading configs to gs://wooliesx-sre-exam-nginx-conf"
-	@gsutil cp index.html gs://wooliesx-sre-exam-nginx-conf
+	@echo "Uploading configs to gs://wx-sre-exam-nginx-conf"
+	@gsutil cp index.html gs://wx-sre-exam-nginx-conf
 
 apply: inventory upload
 	@export ANSIBLE_HOST_KEY_CHECKING=False

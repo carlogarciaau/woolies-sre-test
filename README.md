@@ -1,4 +1,4 @@
-# WooliesX-SRE-Test
+# WX-SRE-Test
 
 ## Summary
 Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansible tasks. This is all done in GCP.
@@ -18,7 +18,7 @@ Deployment of NGINX servers on GCE and K8s using Terraform as well as some Ansib
 
 ## K8s App Deployment
 1. Setup k8s - `gcloud container clusters get-credentials <YOUR_PROJECT_ID>-gke --region <YOUR_REGION> --project <YOUR_PROJECT_ID>`
-2. Example: `gcloud container clusters get-credentials my-project-gke --region australia-southeast1 --project wooliesx-exam`
+2. Example: `gcloud container clusters get-credentials my-project-gke --region australia-southeast1 --project wx-exam`
 3. `cd k8s/overlay/dev`
 4. Test with `kubectl apply -k . --dry-run=client`
 5. Apply with `kubectl apply -k .` 

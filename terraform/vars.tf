@@ -1,7 +1,7 @@
 variable "project" {
   description = "project id"
   type        = string
-  default     = "cg-wooliesx-sre-exam-project"
+  default     = "cg-wx-sre-exam-project"
 }
 
 variable "region" {
